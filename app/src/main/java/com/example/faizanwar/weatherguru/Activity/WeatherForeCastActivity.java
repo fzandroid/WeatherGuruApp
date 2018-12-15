@@ -1,10 +1,14 @@
-package com.example.faizanwar.weatherguru;
+package com.example.faizanwar.weatherguru.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.faizanwar.weatherguru.R;
+
 public class WeatherForeCastActivity extends AppCompatActivity {
+
+    //TODO Create a custom view for search functionality
 
     private TextView mWeatherTextView;
     @Override
