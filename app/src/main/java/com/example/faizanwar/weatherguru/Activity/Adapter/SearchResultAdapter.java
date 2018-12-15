@@ -1,3 +1,5 @@
+package com.example.faizanwar.weatherguru.Activity.Adapter;
+
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -26,10 +28,8 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public SearchResultAdapter(ArrayList<LocatorPlaces> msearchListResults, Context mContext) {
         this.mSearchListResults = msearchListResults;
         this.mContext = mContext;
-        this.clickListener = (PlaceClickListener) mContext;
+       // this.clickListener = (PlaceClickListener) mContext;
     }
-
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -40,7 +40,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-
         SearchResultViewHolder searchResultViewHolder = (SearchResultViewHolder) viewHolder;
         final LocatorPlaces place = mSearchListResults.get(position);
         searchResultViewHolder.name.setText(place.getmPlaceName());
@@ -59,7 +58,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mSearchListResults.size();
     }
 
     class SearchResultViewHolder extends RecyclerView.ViewHolder {

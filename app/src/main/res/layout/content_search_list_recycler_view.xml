@@ -6,14 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <com.bbva.bgm.uicatalog.widget.CatalogTextView
+    <TextView
         android:id="@+id/SearchResultLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:textStyle="medium"
-        android:lineSpacingExtra="@dimen/line_spacing_huge"
-        android:textColor="@color/bbva_white_core_blue"
-        android:padding="@dimen/normal_margin_padding"
+        android:lineSpacingExtra="6sp"
+        android:textColor="#1464A5"
+        android:padding="30dp"
         android:textSize="14sp"/>
 
     <View
