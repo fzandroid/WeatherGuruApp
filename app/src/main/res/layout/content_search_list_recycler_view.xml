@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/SearchResultItemLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.bbva.bgm.uicatalog.widget.CatalogTextView
+        android:id="@+id/SearchResultLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:textStyle="medium"
+        android:lineSpacingExtra="@dimen/line_spacing_huge"
+        android:textColor="@color/bbva_white_core_blue"
+        android:padding="@dimen/normal_margin_padding"
+        android:textSize="14sp"/>
+
+    <View
+        android:id="@+id/SearchResultDividerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#E9E9E9"/>
+
+</LinearLayout>
