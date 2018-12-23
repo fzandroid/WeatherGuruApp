@@ -1,7 +1,11 @@
 package com.example.faizanwar.weatherguru.Activity;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.faizanwar.weatherguru.Activity.Adapter.SearchResultAdapter;
+import com.example.faizanwar.weatherguru.Activity.Constants.RequestCodeConstants;
 import com.example.faizanwar.weatherguru.R;
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.AutocompletePrediction;
@@ -26,7 +31,7 @@ import java.util.ArrayList;
 
 import Data.LocatorPlaces;
 
-public class SearchPlacesActivity extends AppCompatActivity {
+public class SearchPlacesActivity extends AppCompatActivity implements SearchResultAdapter.PlaceClickListener {
 
 
     private TextView mToolbarTitle;
@@ -46,6 +51,8 @@ public class SearchPlacesActivity extends AppCompatActivity {
         setListeners();
     }
 
+
+
     private void initializeViews() {
 
         mToolbarTitle = findViewById(R.id.toolbar_title);
@@ -62,6 +69,11 @@ public class SearchPlacesActivity extends AppCompatActivity {
         mSearchLocationText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!TextUtils.isEmpty(s)) {
                     AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
                             .setTypeFilter(AutocompleteFilter.TYPE_FILTER_CITIES)
@@ -89,16 +101,17 @@ public class SearchPlacesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
     }
 
+    @Override
+    public void onPlaceClicked(LocatorPlaces place) {
+        Intent intent = new Intent(SearchPlacesActivity.this, WeatherForeCastActivity.class);
+        intent.putExtra(RequestCodeConstants.REQUEST_CODE_SEND_LOCATION, place);
+        startActivity(intent);
+    }
 }
 
