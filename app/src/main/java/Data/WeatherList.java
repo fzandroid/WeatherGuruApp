@@ -2,7 +2,7 @@ package Data;
 
 import com.google.gson.annotations.SerializedName;
 
-class WeatherList {
+public class WeatherList {
 
     @SerializedName("id")
     public double id;
@@ -12,4 +12,20 @@ class WeatherList {
     public String descrition;
     @SerializedName("icon")
     public String icon;
+
+    public double getId() {
+        return id;
+    }
+
+    public String getMain() {
+        return main;
+    }
+
+    public String getDescrition() {
+        return descrition;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
 }

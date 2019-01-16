@@ -19,4 +19,28 @@ public class ForeCastList {
     public Wind wind;
     @SerializedName("dt_txt")
     public String date;
+
+    public String getDt() {
+        return dt;
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public List<WeatherList> getWeather() {
+        return weather;
+    }
+
+    public Clouds getClouds() {
+        return clouds;
+    }
+
+    public Wind getWind() {
+        return wind;
+    }
+
+    public String getDate() {
+        return date;
+    }
 }

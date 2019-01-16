@@ -10,5 +10,5 @@ public interface GetDataService {
      String API_KEY = "59f33f5179ca1c02833317e3ae5db345";
 
     @GET("data/2.5/forecast")
-    Call<WeatherForecast> getWeatherForecast(@Query("q")String location, @Query("APPID")String API_KEY);
+    Call<WeatherForecast> getWeatherForecast(@Query("q")String location, @Query("APPID")String API_KEY, @Query("units")String unit);
 }

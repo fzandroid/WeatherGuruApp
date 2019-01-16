@@ -28,7 +28,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public SearchResultAdapter(ArrayList<LocatorPlaces> msearchListResults, Context mContext) {
         this.mSearchListResults = msearchListResults;
         this.mContext = mContext;
-        this.clickListener = (PlaceClickListener) mContext;
+//        this.clickListener = (PlaceClickListener) mContext;
     }
     @NonNull
     @Override

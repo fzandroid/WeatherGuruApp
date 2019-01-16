@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/SearchResultItemLayout"
+    android:orientation="horizontal">
+
+   <ImageView
+       android:id="@+id/WeatherConditionListImage"
+       android:layout_width="20dp"
+       android:layout_height="20dp"
+       android:layout_marginTop="10dp"
+       android:layout_marginLeft="10dp"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/DateListLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="20 December"/>
+        <TextView
+            android:id="@+id/WeatherConditionListText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/DateListLabel"
+            tools:text="Moderate Rain"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <TextView
+        android:id="@+id/MaxTempListLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:text="20"/>
+
+    <TextView
+        android:id="@+id/MinTempListLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:text="10"/>
+
+</LinearLayout>

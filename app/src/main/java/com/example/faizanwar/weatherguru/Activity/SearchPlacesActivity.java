@@ -1,11 +1,8 @@
 package com.example.faizanwar.weatherguru.Activity;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -45,12 +42,11 @@ public class SearchPlacesActivity extends AppCompatActivity implements SearchRes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_places);
+        setContentView(R.layout.content_search_fragment);
         mGeoDataClient = Places.getGeoDataClient(this, null);
         initializeViews();
         setListeners();
     }
-
 
 
     private void initializeViews() {
