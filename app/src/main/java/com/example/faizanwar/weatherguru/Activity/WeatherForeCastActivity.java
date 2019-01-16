@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +42,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import Data.LocatorPlaces;
 import Data.WeatherForecast;
 import Fragments.SearchFragment;
 import Network.GetDataService;
@@ -68,6 +70,7 @@ public class WeatherForeCastActivity extends AppCompatActivity implements Google
     private TextView mCityName;
     private RecyclerView mWeatherForecastList;
     private WeatherForecastListAdapter mWeatherAdapter;
+    private LocatorPlaces mPlaces;
     private WeatherForecast mWeatherForecast;
     private String mTemperatureUnit = TemperatureUnitOfMeasurement.TEMPERATURE_UNIT_CELCIUS;
 
@@ -78,9 +81,12 @@ public class WeatherForeCastActivity extends AppCompatActivity implements Google
         setContentView(R.layout.weather_forecast_activity);
         initializeUiComponents();
         initializeGoogleClient();
-        if (!hasLocationPermission())
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            checkExtra();
+            dispatchrequest();
+        } else if (!hasLocationPermission()) {
             requestLocationPermission(this, 101, Manifest.permission.ACCESS_FINE_LOCATION);
-        setClickListeners();
+        }
     }
 
     private void initializeUiComponents() {
@@ -106,8 +112,10 @@ public class WeatherForeCastActivity extends AppCompatActivity implements Google
     }
 
     private void dispatchrequest() {
-
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        if (mPlaces != null && !TextUtils.isEmpty(mPlaces.getmPlaceName())) {
+            mUserCity = mPlaces.getmPlaceName();
+        }
         Call<WeatherForecast> call = service.getWeatherForecast(mUserCity, GetDataService.API_KEY, mTemperatureUnit); //imperial for F
         call.enqueue(new Callback<WeatherForecast>() {
             @Override
@@ -134,6 +142,14 @@ public class WeatherForeCastActivity extends AppCompatActivity implements Google
             }
         });
 
+    }
+
+    private void checkExtra() {
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle.containsKey(RequestCodeConstants.EXTRA_LOCATION) && bundle.get(RequestCodeConstants.EXTRA_LOCATION) != null) {
+            mPlaces = bundle.getParcelable(RequestCodeConstants.EXTRA_LOCATION);
+        }
     }
 
 
@@ -169,17 +185,6 @@ public class WeatherForeCastActivity extends AppCompatActivity implements Google
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     }
 
-    private void setClickListeners() {
-//        mWeatherTextView = findViewById(R.id.WeatherTextView);
-//        mWeatherTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(WeatherForeCastActivity.this, SearchPlacesActivity.class);
-//                startActivityForResult(intent, RequestCodeConstants.REQUEST_CODE_GET_LOCATION);
-//            }
-//        });
-    }
-
     private boolean hasLocationPermission() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
@@ -187,11 +192,6 @@ public class WeatherForeCastActivity extends AppCompatActivity implements Google
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RequestCodeConstants.REQUEST_CODE_GET_LOCATION) {
-
-        }
-
-
     }
 
     @Override
@@ -248,8 +248,6 @@ public class WeatherForeCastActivity extends AppCompatActivity implements Google
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            // Toast.makeText(this, "Location not Detected", Toast.LENGTH_SHORT).show();
         }
     }
 

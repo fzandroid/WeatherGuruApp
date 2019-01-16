@@ -3,7 +3,7 @@ package com.example.faizanwar.weatherguru.Activity.Constants;
 public class RequestCodeConstants {
 
 
-    public static final String REQUEST_CODE_SEND_LOCATION = "sendLocation";
+    public static final String EXTRA_LOCATION = "location";
 
 
     //Request Codes

@@ -1,6 +1,5 @@
 package com.example.faizanwar.weatherguru.Activity.Adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,17 +17,18 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
     private ArrayList<LocatorPlaces> mSearchListResults;
-    private Context mContext;
-    private PlaceClickListener clickListener;
+    private PlaceClickListener mClickListener;
 
     public interface PlaceClickListener {
         void onPlaceClicked(LocatorPlaces place);
     }
 
-    public SearchResultAdapter(ArrayList<LocatorPlaces> msearchListResults, Context mContext) {
+    public void setItemClickListener(PlaceClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    public SearchResultAdapter(ArrayList<LocatorPlaces> msearchListResults) {
         this.mSearchListResults = msearchListResults;
-        this.mContext = mContext;
-//        this.clickListener = (PlaceClickListener) mContext;
     }
     @NonNull
     @Override
@@ -46,7 +46,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         searchResultViewHolder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickListener.onPlaceClicked(place);
+                mClickListener.onPlaceClicked(place);
             }
         });
         if (position == mSearchListResults.size() - 1) {

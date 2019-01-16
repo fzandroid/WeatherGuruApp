@@ -19,7 +19,6 @@ import android.widget.EditText;
 
 import com.example.faizanwar.weatherguru.Activity.Adapter.SearchResultAdapter;
 import com.example.faizanwar.weatherguru.Activity.Constants.RequestCodeConstants;
-import com.example.faizanwar.weatherguru.Activity.SearchPlacesActivity;
 import com.example.faizanwar.weatherguru.Activity.WeatherForeCastActivity;
 import com.example.faizanwar.weatherguru.R;
 import com.google.android.gms.location.places.AutocompleteFilter;
@@ -59,28 +58,6 @@ public class SearchFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public SearchFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +71,16 @@ public class SearchFragment extends Fragment {
 
         mSearchLocationText = view.findViewById(R.id.LocationSearchLabel);
         mSearchRersultRecyclerView = view.findViewById(R.id.SearchResultRecyclerView);
-        mAdapter = new SearchResultAdapter(mResponseList, view.getContext());
+        mAdapter = new SearchResultAdapter(mResponseList);
+        mAdapter.setItemClickListener(new SearchResultAdapter.PlaceClickListener() {
+            @Override
+            public void onPlaceClicked(LocatorPlaces place) {
+                Intent intent = new Intent(getActivity().getBaseContext(), WeatherForeCastActivity.class);
+                intent.putExtra(RequestCodeConstants.EXTRA_LOCATION, place);
+                startActivity(intent);
+
+            }
+        });
         mSearchRersultRecyclerView.setAdapter(mAdapter);
         mSearchRersultRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         mGeoDataClient = Places.getGeoDataClient(view.getContext(), null);
